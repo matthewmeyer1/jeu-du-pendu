@@ -2,10 +2,13 @@
 MGA802-01 Module 3
 
 Le projet ci-dessous et un codage du Jeu du Pendu
+
 Tout le code est situé dans le fichier main
+
 un fichier mote_pendu.txt doit etre dans le dossier
 
 le fichier requirements.txt est la pour pouvoir installer les module externes (unidecode)
+
 Pour utiliser le fichier requirements.txt, voir [Use requirements.txt﻿](https://www.jetbrains.com/help/pycharm/managing-dependencies.html)
 
 **Comment jouer:**

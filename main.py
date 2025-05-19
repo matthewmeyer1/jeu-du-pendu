@@ -1,5 +1,6 @@
 import random
 import unidecode
+import os.path
 
 # Fonction principal qui va etre appele par le code pour rouler le reste des fonctions
 def main():
@@ -7,14 +8,35 @@ def main():
     rejouer = True
     while rejouer:
         nbre_tours = 6 # nombre de tours prédifini
+
+        # Fonctions assurant le deroulement du jeu
+        message_de_debut()
         mot_choisi, mot_actuel = choisir_mot() # Choix random du mot et creation du mot actuel
         iteration_tours(mot_actuel, mot_choisi , nbre_tours) # Partie principale du code, va iterer les tours
 
         rejouer = recommancer()
 
+# Message d'explication du jeu
+def message_de_debut():
+    print("Bienvenue au jeu du pendu! Vous avez 6 chances pour deviner le mot")
+
 # Fonction qui va selectionner un mot random de la liste et la retourner
 def choisir_mot():
-    with open("mots_pendu.txt", "r", encoding='utf-8') as mots_pendu: # Ouvrir le fichier mots_pendu et creer une liste banque de mots
+
+    # Demander le nom du fichier voulu
+    liste_custom = input("Entrez le nom du fichier qui contient les mots (vide sera la liste défaut): ")
+
+    # Si le fichier contient .txt, l'enlever pour
+    liste_custom = liste_custom.replace(".txt", "")
+    nom_de_fichier = ""
+
+    if os.path.isfile(liste_custom + ".txt"): # Si le nom de fichier existe
+        nom_de_fichier = liste_custom + ".txt"
+    else: # Si le fichier existe pas
+        print("Le fichier 'mots_pendu.txt' sera utilisé")
+        nom_de_fichier = "mots_pendu.txt"
+
+    with open(nom_de_fichier, "r", encoding='utf-8') as mots_pendu: # Ouvrir le fichier et creer une liste banque de mots
         banque_de_mots = mots_pendu.readlines()
 
     mot_choisi = random.choice(banque_de_mots).strip('\n') # Choisir un mot de la liste et Enlever le charactere de nouvelle ligne

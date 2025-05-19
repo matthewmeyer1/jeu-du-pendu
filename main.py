@@ -1,3 +1,8 @@
+# Le code est le jeu du pendu codé par Matthew Meyer
+# Le joueur peut choisir son propre fichier de mots
+# Il y a 6 chances
+# Un indice peut etre donné sil reste seulement 1 chance
+
 import random
 import unidecode
 import os.path

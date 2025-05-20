@@ -4,8 +4,9 @@
 # Un indice peut etre donné sil reste seulement 1 chance
 
 import random
-import unidecode
 import os.path
+import unicodedata
+
 
 # Fonction principal qui va etre appele par le code pour rouler le reste des fonctions
 def main():
@@ -45,7 +46,8 @@ def choisir_mot():
         banque_de_mots = mots_pendu.readlines()
 
     mot_choisi = random.choice(banque_de_mots).strip('\n') # Choisir un mot de la liste et Enlever le charactere de nouvelle ligne
-    mot_choisi = unidecode.unidecode(mot_choisi) # Enlever les charactere speciaux tel que les accents
+    mot_choisi = ''.join(c for c in unicodedata.normalize('NFD', mot_choisi)
+                  if unicodedata.category(c) != 'Mn') # Enlever les charactere speciaux tel que les accents
     mot_choisi = mot_choisi.lower() # S'assurer que tous les lettres du mot sont en minuscules
     mot_actuel = "_" * len(mot_choisi) # Creer le mot actual de la meme longueur du mot choisi, compose seulement de "_"
 
